@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>洛克精灵孵蛋概率计算器 · 国王球契约</title>
+    <title>洛克精灵孵蛋概率计算器 · 国王球契约 · V2.5.3</title>
+    <!--
+    ============================================
+     洛克王国孵蛋概率计算器 V2.5.3
+     作者：Ya_星河
+     更新：父本图标改为洛克王国火系风格
+     协议：CC BY-NC 4.0 (禁止商用)
+    ============================================
+    -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
         * { margin:0; padding:0; box-sizing:border-box; }
@@ -28,24 +36,26 @@
             box-shadow: inset 0 0 10px rgba(255,255,255,0.5), 0 0 20px rgba(74,144,217,0.3);
             animation: floatBubble linear infinite; opacity:0;
         }
-        @keyframes floatBubble {
-            0%{ transform:translateY(100vh) scale(0); opacity:0; }
-            10%{ opacity:0.8; } 90%{ opacity:0.8; }
-            100%{ transform:translateY(-10vh) scale(1.2); opacity:0; }
-        }
+        @keyframes floatBubble { 0%{transform:translateY(100vh) scale(0);opacity:0;} 10%{opacity:0.8;} 90%{opacity:0.8;} 100%{transform:translateY(-10vh) scale(1.2);opacity:0;} }
         .wave {
-            position:fixed; bottom:-50px; left:-50%; width:200%; height:200px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 200"><path fill="rgba(74,144,217,0.15)" d="M0,100 C240,200 480,0 720,100 C960,200 1200,0 1440,100 L1440,200 L0,200 Z"/></svg>') repeat-x;
-            animation: waveMove 8s linear infinite; pointer-events:none; z-index:0;
+            position:fixed; bottom:0; left:0; width:200%; height:200px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2880 200" preserveAspectRatio="none"><path fill="rgba(74,144,217,0.15)" d="M0,100 C240,30 480,170 720,100 C960,30 1200,170 1440,100 C1680,30 1920,170 2160,100 C2400,30 2640,170 2880,100 L2880,200 L0,200 Z"/></svg>') repeat-x;
+            animation: waveMove 12s linear infinite; pointer-events:none; z-index:0;
         }
         @keyframes waveMove { 0%{ transform:translateX(0); } 100%{ transform:translateX(-50%); } }
         .magic-book {
             position:relative; z-index:1; background: rgba(232,244,253,0.8); backdrop-filter: blur(8px);
             border:8px solid rgba(58,107,140,0.7); border-radius:30px;
             box-shadow: 0 0 0 4px rgba(91,155,192,0.6), 0 0 0 8px rgba(44,80,104,0.5), 0 20px 40px rgba(0,0,0,0.4), inset 0 0 20px rgba(74,144,217,0.3), 0 0 60px rgba(102,204,255,0.3);
-            padding:25px 30px; max-width:820px; width:100%;
+            padding:25px 30px; max-width:860px; width:100%;
+            max-height: 90vh; overflow-y: auto; overflow-x: hidden;
+            scrollbar-width: thin; scrollbar-color: #3a6b8c rgba(232,244,253,0.5);
             animation: bookOpen 0.8s cubic-bezier(0.34,1.56,0.64,1);
         }
+        .magic-book::-webkit-scrollbar { width: 10px; }
+        .magic-book::-webkit-scrollbar-track { background: rgba(232,244,253,0.5); border-radius: 10px; }
+        .magic-book::-webkit-scrollbar-thumb { background: #3a6b8c; border-radius: 10px; border: 2px solid rgba(232,244,253,0.7); }
+        .magic-book::-webkit-scrollbar-thumb:hover { background: #2c5068; }
         @keyframes bookOpen { from{ transform:scale(0.8) rotateX(20deg); opacity:0; } to{ transform:scale(1) rotateX(0); opacity:1; } }
         .magic-book::before {
             content:''; position:absolute; left:-12px; top:20px; bottom:20px; width:20px;
@@ -81,9 +91,9 @@
             background:rgba(58,107,140,0.8); color:#a0e0ff; font-size:0.75rem; padding:2px 10px; border-radius:20px;
             letter-spacing:1px; border:1px solid rgba(91,155,192,0.8);
         }
-        .icon-father { width:40px; height:40px; display:inline-block; margin-right:5px; filter:drop-shadow(0 0 6px #ff8c42); }
-        .icon-mother { width:40px; height:40px; display:inline-block; margin-right:5px; filter:drop-shadow(0 0 6px #66ccff); }
-        .icon-magic-pen { width:24px; height:24px; display:inline-block; margin-right:6px; filter:drop-shadow(0 0 4px #ffd700); }
+        .icon-father { width:40px; height:40px; display:inline-flex; align-items:center; margin-right:5px; filter:drop-shadow(0 0 6px #ff8c42); }
+        .icon-mother { width:40px; height:40px; display:inline-flex; align-items:center; margin-right:5px; filter:drop-shadow(0 0 6px #66ccff); }
+        .icon-magic-pen { width:28px; height:28px; display:inline-block; margin-right:6px; filter:drop-shadow(0 0 4px #ffd700); }
         .icon-medal { width:28px; height:28px; display:inline-block; margin-right:6px; filter:drop-shadow(0 0 6px #ffd700); }
         .icon-kingball { width:32px; height:32px; display:inline-block; margin-right:6px; filter:drop-shadow(0 0 6px #ffaa00); }
         .gem-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 15px; }
@@ -95,6 +105,16 @@
         .gem-grid label:hover { background:rgba(74,144,217,0.25); border-color:#4a90d9; box-shadow:0 0 10px rgba(74,144,217,0.4); }
         .gem-grid input[type="checkbox"] { accent-color:#3a6b8c; width:16px; height:16px; transform:scale(1.1); filter:drop-shadow(0 0 2px #4a90d9); }
         .gem-grid input[type="radio"] { accent-color:#ff8c42; width:16px; height:16px; transform:scale(1.1); filter:drop-shadow(0 0 2px #ffaa00); }
+
+        @keyframes shakeRed {
+            0%,100% { transform: translateX(0); border-color: rgba(140,196,224,0.7); background: rgba(255,255,255,0.4); }
+            20% { transform: translateX(-4px); border-color: #ff4444; background: #ffe6e6; }
+            40% { transform: translateX(4px); border-color: #ff4444; background: #ffe6e6; }
+            60% { transform: translateX(-3px); border-color: #ff4444; background: #ffe6e6; }
+            80% { transform: translateX(3px); border-color: #ff4444; background: #ffe6e6; }
+        }
+        .shake-error { animation: shakeRed 0.5s ease-in-out; }
+
         .btn-cast {
             display:block; width:100%; padding:14px;
             background:linear-gradient(180deg, rgba(91,155,192,0.9), rgba(58,123,160,0.9));
@@ -104,26 +124,21 @@
             box-shadow:0 5px 0 rgba(26,58,92,0.5), 0 8px 15px rgba(0,0,0,0.3);
             margin:10px 0 5px; backdrop-filter:blur(4px);
         }
-        .btn-cast:hover {
-            background:linear-gradient(180deg, rgba(109,181,217,0.9), rgba(74,144,192,0.9));
-            transform:translateY(-1px); box-shadow:0 7px 0 rgba(26,58,92,0.6), 0 12px 20px rgba(0,0,0,0.4);
-        }
+        .btn-cast:hover { background:linear-gradient(180deg, rgba(109,181,217,0.9), rgba(74,144,192,0.9)); transform:translateY(-1px); box-shadow:0 7px 0 rgba(26,58,92,0.6), 0 12px 20px rgba(0,0,0,0.4); }
         .btn-cast:active { transform:translateY(2px); box-shadow:0 3px 0 rgba(26,58,92,0.6), 0 6px 10px rgba(0,0,0,0.3); }
-        .btn-secondary {
+        .btn-small {
             background:linear-gradient(180deg, rgba(58,107,140,0.8), rgba(44,80,104,0.8));
             color:#a0e0ff; border:2px solid rgba(91,155,192,0.6); box-shadow:0 3px 0 rgba(26,48,72,0.5);
-            font-size:0.95rem; padding:10px 20px; width:auto; display:inline-block;
+            font-size:0.85rem; padding:6px 14px; border-radius:20px; cursor:pointer; margin:2px; transition:all 0.2s;
         }
+        .btn-small:hover { transform:translateY(-1px); box-shadow:0 4px 10px rgba(74,144,217,0.3); }
         .kingball-section {
             background:rgba(255,240,200,0.6); border:2px solid rgba(255,180,0,0.6); border-radius:16px;
             padding:15px; margin-bottom:15px; display:flex; flex-wrap:wrap; align-items:center; gap:15px;
         }
         .kingball-section label { display:flex; align-items:center; gap:5px; font-weight:bold; color:#5a3e0b; }
         .kingball-attr-select { display:flex; flex-wrap:wrap; gap:10px; margin-left:10px; }
-        .kingball-attr-select label {
-            background:rgba(255,255,255,0.6); padding:3px 10px; border-radius:20px;
-            border:1px solid #c9a87c; cursor:pointer;
-        }
+        .kingball-attr-select label { background:rgba(255,255,255,0.6); padding:3px 10px; border-radius:20px; border:1px solid #c9a87c; cursor:pointer; }
         .results-scroll { margin-top:25px; border-top:2px solid rgba(91,155,192,0.6); padding-top:20px; display:none; animation: fadeUp 0.5s ease; }
         .results-scroll.active { display:block; }
         @keyframes fadeUp { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
@@ -142,73 +157,61 @@
         .attr-table { width:100%; border-collapse:collapse; margin-top:5px; }
         .attr-table th { background:rgba(192,221,240,0.6); color:#1a3a5c; padding:6px; border:1px solid rgba(58,123,160,0.5); }
         .attr-table td { text-align:center; padding:6px; border:1px solid rgba(140,196,224,0.5); color:#1a3048; font-weight:bold; }
-        .target-area { display:flex; flex-wrap:wrap; gap:15px; align-items:center; }
+        .target-area { display:flex; flex-wrap:wrap; gap:15px; align-items:center; margin: 10px 0; }
         .target-area .gem-grid { grid-template-columns:repeat(3,1fr); }
         .target-result {
-            font-size:1.2rem; color:#1a5c3a; font-weight:bold; background:rgba(208,240,224,0.7);
-            padding:5px 15px; border-radius:20px; border:1px solid rgba(58,123,160,0.5);
-        }
-        .error-txt {
-            color:#c0392b; font-weight:bold; margin-top:8px; background:rgba(253,232,232,0.8);
-            padding:5px 15px; border-radius:20px; display:inline-block; border:1px solid #c0392b;
-        }
-        .tiny-note { font-size:0.8rem; color:#3a6b8c; margin-top:4px; }
-
-        /* 社交媒体链接新样式 */
-        .social-footer {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            margin-top: 20px;
-            padding: 12px 20px;
-            background: rgba(240, 248, 255, 0.5);
-            backdrop-filter: blur(4px);
-            border: 2px solid rgba(91, 155, 192, 0.4);
-            border-radius: 20px;
-            flex-wrap: wrap;
-        }
-        .social-link {
-            font-size: 1.1rem;
-            font-weight: bold;
-            text-decoration: none;
-            padding: 6px 18px;
-            border-radius: 25px;
-            background: rgba(255, 255, 255, 0.5);
-            border: 2px solid rgba(91, 155, 192, 0.6);
-            transition: all 0.2s;
-            letter-spacing: 1px;
-        }
-        .social-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(74, 144, 217, 0.3);
-        }
-        .link-douyin {
-            color: #000000;
-            border-color: #000000;
-        }
-        .link-bilibili {
-            color: #fb7299;
-            border-color: #fb7299;
-        }
-        .social-divider {
-            color: #3a6b8c;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        /* 提示信息 */
-        .recalculate-hint {
-            text-align: center;
-            margin: 10px 0 5px;
-            font-size: 0.9rem;
-            color: #b8860b;
-            font-weight: bold;
-            background: rgba(255,255,224,0.5);
-            padding: 6px 15px;
-            border-radius: 20px;
+            font-size: 1.8rem; 
+            color: #1a5c3a; 
+            font-weight: bold; 
+            background: rgba(208,240,224,0.7);
+            padding: 10px 25px; 
+            border-radius: 30px; 
+            border: 2px solid rgba(58,123,160,0.6);
             display: inline-block;
-            width: 100%;
+            margin: 10px 0 5px;
+            text-shadow: 1px 1px 0 white;
         }
+        .error-txt { color:#c0392b; font-weight:bold; margin-top:8px; background:rgba(253,232,232,0.8); padding:5px 15px; border-radius:20px; display:inline-block; border:1px solid #c0392b; }
+        .tiny-note { font-size:0.8rem; color:#3a6b8c; margin-top:4px; }
+        .simulator-area { display:flex; align-items:center; gap:15px; margin-top:10px; flex-wrap:wrap; }
+        .simulator-area input { width:80px; padding:6px; border-radius:10px; border:1px solid #5b9bc0; text-align:center; }
+        .recommend-box { background:rgba(255,240,220,0.7); border:1px solid #ffaa00; border-radius:12px; padding:10px 15px; margin-top:10px; }
+        .compare-buttons { display:flex; gap:10px; margin-top:15px; justify-content: center; flex-wrap:wrap; }
+        .compare-panel { margin-top:20px; display:none; }
+        .compare-panel.active { display:block; }
+
+        .compare-slot {
+            position: relative;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.4);
+            border: 2px solid rgba(140,196,224,0.5);
+        }
+        .compare-slot.winner {
+            border: 3px solid #ffd700;
+            box-shadow: 0 0 12px #ffd700;
+        }
+        .winner-badge {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            width: 36px;
+            height: 36px;
+            display: none;
+        }
+        .compare-slot.winner .winner-badge {
+            display: block;
+        }
+
+        .footer-section { margin-top:30px; border-top:2px solid rgba(91,155,192,0.5); padding-top:20px; text-align:center; }
+        .social-footer { display:flex; justify-content:center; align-items:center; gap:20px; margin-bottom:10px; flex-wrap:wrap; }
+        .social-link { font-size:1rem; font-weight:bold; text-decoration:none; padding:5px 16px; border-radius:20px; background:rgba(255,255,255,0.5); border:2px solid rgba(91,155,192,0.6); transition:all 0.2s; }
+        .link-douyin { color:#000000; border-color:#000000; }
+        .link-bilibili { color:#fb7299; border-color:#fb7299; }
+        .copyright { font-size:0.85rem; color:#2c5068; background:rgba(255,255,240,0.4); padding:6px 15px; border-radius:20px; border:1px dashed rgba(44,80,104,0.5); display:inline-block; margin-top:8px; }
+        .copyright a { color:#2c5068; text-decoration:underline; }
+        .recalculate-hint { text-align:center; margin:15px 0 5px; font-size:0.9rem; color:#b8860b; font-weight:bold; }
     </style>
 </head>
 <body>
@@ -224,34 +227,46 @@
         <div class="parent-duo">
             <div class="parent-card" id="fatherCard">
                 <h2>
-                    <svg class="icon-father" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="50" cy="50" r="45" fill="#ff6b2b" stroke="#cc4400" stroke-width="3"/>
-                        <circle cx="50" cy="50" r="35" fill="#ff8c42" opacity="0.8"/>
-                        <circle cx="50" cy="50" r="22" fill="#ffb266"/>
-                        <ellipse cx="36" cy="36" rx="8" ry="12" fill="#ffcc00" opacity="0.9" transform="rotate(-30 36 36)"/>
-                        <ellipse cx="64" cy="36" rx="8" ry="12" fill="#ffcc00" opacity="0.9" transform="rotate(30 64 36)"/>
-                        <ellipse cx="50" cy="62" rx="10" ry="7" fill="#ffaa33" opacity="0.9"/>
-                        <path d="M22 48 Q30 30 50 38 Q70 30 78 48" fill="#ff4400" opacity="0.5"/>
-                    </svg>
-                    父本
-                    <span class="badge" id="fatherBadge">0条</span>
+                    <!-- 父本图标：洛克王国火系风格 -->
+                    <span class="icon-father">
+                        <svg viewBox="0 0 100 100" width="36" height="36">
+                            <defs>
+                                <linearGradient id="fireGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+                                    <stop offset="0%" stop-color="#ff4500"/>
+                                    <stop offset="50%" stop-color="#ff8c00"/>
+                                    <stop offset="100%" stop-color="#ffd700"/>
+                                </linearGradient>
+                                <filter id="glow">
+                                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                                    <feMerge>
+                                        <feMergeNode in="coloredBlur"/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
+                            </defs>
+                            <path d="M50,85 C30,60 15,40 25,20 C30,10 40,5 50,8 C60,5 70,10 75,20 C85,40 70,60 50,85 Z" fill="url(#fireGradient)" filter="url(#glow)"/>
+                            <path d="M40,55 C35,45 40,30 50,25 C60,30 65,45 60,55 C55,65 45,65 40,55 Z" fill="#ffeb3b" opacity="0.8"/>
+                            <circle cx="45" cy="40" r="4" fill="#ffffff" opacity="0.7"/>
+                            <circle cx="55" cy="48" r="3" fill="#ffffff" opacity="0.6"/>
+                        </svg>
+                    </span>
+                    父本 <span class="badge" id="fatherBadge">0条</span>
                 </h2>
                 <div class="gem-grid" id="fatherGems"></div>
             </div>
             <div class="parent-card" id="motherCard">
                 <h2>
-                    <svg class="icon-mother" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="50" cy="50" r="45" fill="#4a90d9" stroke="#2c5f8a" stroke-width="3"/>
-                        <circle cx="50" cy="50" r="35" fill="#66b8ff" opacity="0.8"/>
-                        <circle cx="50" cy="50" r="22" fill="#99ddff"/>
-                        <ellipse cx="36" cy="36" rx="7" ry="10" fill="#ffffff" opacity="0.7" transform="rotate(-25 36 36)"/>
-                        <ellipse cx="64" cy="36" rx="7" ry="10" fill="#ffffff" opacity="0.7" transform="rotate(25 64 36)"/>
-                        <ellipse cx="50" cy="60" rx="9" ry="6" fill="#aee0ff" opacity="0.9"/>
-                        <path d="M30 45 Q40 55 50 45 Q60 55 70 45" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.8"/>
-                        <circle cx="50" cy="25" r="5" fill="#ccf0ff" opacity="0.8"/>
-                    </svg>
-                    母本
-                    <span class="badge" id="motherBadge">0条</span>
+                    <!-- 母本图标：童话风水滴 -->
+                    <span class="icon-mother">
+                        <svg viewBox="0 0 100 100" width="36" height="36">
+                            <path d="M50,20 Q30,45 30,65 Q30,85 50,90 Q70,85 70,65 Q70,45 50,20 Z" fill="#a0e0ff" stroke="#4a90d9" stroke-width="2"/>
+                            <path d="M50,35 Q40,55 40,65 Q40,78 50,82 Q60,78 60,65 Q60,55 50,35 Z" fill="#d4f0ff" opacity="0.8"/>
+                            <circle cx="45" cy="58" r="4" fill="#ffffff" opacity="0.8"/>
+                            <circle cx="55" cy="62" r="3" fill="#ffffff" opacity="0.7"/>
+                            <circle cx="50" cy="72" r="4" fill="#ffffff" opacity="0.6"/>
+                        </svg>
+                    </span>
+                    母本 <span class="badge" id="motherBadge">0条</span>
                 </h2>
                 <div class="gem-grid" id="motherGems"></div>
             </div>
@@ -260,13 +275,7 @@
         <div class="kingball-section">
             <div style="display:flex; flex-direction:column; gap:5px;">
                 <label style="display:flex; align-items:center; gap:8px;">
-                    <svg class="icon-kingball" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="50" cy="50" r="45" fill="#ffd700" stroke="#cc8800" stroke-width="4"/>
-                        <circle cx="50" cy="50" r="35" fill="#ffec99" stroke="#e6b800" stroke-width="2"/>
-                        <polygon points="50,18 58,42 84,42 64,56 72,82 50,66 28,82 36,56 16,42 42,42" fill="#ffcc00" stroke="#cc8800" stroke-width="2"/>
-                        <circle cx="50" cy="48" r="10" fill="#ffffff" opacity="0.7"/>
-                        <text x="50" y="53" text-anchor="middle" font-size="12" font-weight="bold" fill="#cc6600">王</text>
-                    </svg>
+                    <img src="https://patchwiki.biligame.com/images/rocom/2/2e/jygbfxpdbup5weqy4zaqnyaw2fcfyrq.png" class="icon-kingball" alt="国王球">
                     <input type="checkbox" id="useKingBall"> 使用国王球契约 (必定三条个体)
                 </label>
                 <div id="kingBallAttrArea" style="display:none; flex-wrap:wrap; align-items:center; gap:10px; margin-top:5px;">
@@ -278,36 +287,29 @@
         </div>
 
         <button class="btn-cast" id="calculateBtn">
-            <svg class="icon-magic-pen" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <rect x="30" y="15" width="12" height="55" rx="3" fill="#8b5e3c" transform="rotate(-30 36 42)"/>
-                <polygon points="30,70 42,42 54,70" fill="#ffd700" transform="rotate(-30 42 56)"/>
-                <circle cx="50" cy="20" r="8" fill="#ffd700"/>
-                <circle cx="50" cy="20" r="4" fill="#ffec99"/>
-                <path d="M45 22 L40 28 L48 25 Z" fill="#ff8c42" opacity="0.8"/>
-                <path d="M55 22 L60 28 L52 25 Z" fill="#ff8c42" opacity="0.8"/>
-                <circle cx="50" cy="10" r="6" fill="#ffe066" opacity="0.7"/>
-            </svg>
+            <img src="https://patchwiki.biligame.com/images/rocom/9/9e/c7cjwy6j64t3cky5ye9n3n4q0vjgoen.png" class="icon-magic-pen" alt="魔法笔">
             开始计算遗传概率
         </button>
-
-        <!-- 重要提示 -->
-        <div class="recalculate-hint">
-            ⚠️ 当修改父母本条件时，需要重新点击“开始计算遗传概率”
-        </div>
-
-        <!-- 作者社交媒体链接（纯文字，无图标） -->
-        <div class="social-footer">
-            <a href="https://v.douyin.com/2JECiUV9KKI/" target="_blank" class="social-link link-douyin">作者的抖音</a>
-            <span class="social-divider">|</span>
-            <a href="https://b23.tv/mXvvxbN" target="_blank" class="social-link link-bilibili">作者的B站</a>
-        </div>
+        <div class="recalculate-hint">⚠️ 修改父母本条件后请重新计算</div>
 
         <div class="results-scroll" id="resultsArea"></div>
+
+        <div class="footer-section">
+            <div class="social-footer">
+                <a href="https://v.douyin.com/2JECiUV9KKI/" target="_blank" class="social-link link-douyin">作者的抖音</a>
+                <span style="color:#3a6b8c; font-weight:bold;">|</span>
+                <a href="https://b23.tv/mXvvxbN" target="_blank" class="social-link link-bilibili">作者的B站</a>
+            </div>
+            <div class="copyright">🛡️ 作者：Ya_星河 | 采用 <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a> 国际许可协议 | 禁止商用</div>
+            <div style="margin-top:8px; font-size:0.7rem; color:#5b7a90;">洛克精灵孵蛋概率计算器 V2.5.3</div>
+        </div>
     </div>
 
     <script>
         (function() {
             const SLOTS = ["生命", "物攻", "物防", "魔攻", "魔防", "速度"];
+            let compareSlots = [null, null];
+            let currentResultSnapshot = null;
 
             function createBubbles() {
                 const container = document.getElementById('bubblesContainer');
@@ -336,8 +338,7 @@
                         chosen.pop();
                     }
                 }
-                helper(0, []);
-                return result;
+                helper(0, []); return result;
             }
 
             function permutations(arr) {
@@ -352,8 +353,7 @@
                         current.pop();
                     }
                 }
-                permute(arr, []);
-                return result;
+                permute(arr, []); return result;
             }
 
             class BreedCalculator {
@@ -375,19 +375,14 @@
                     if (this.isKingBall) {
                         this.effectiveSlots = SLOTS.filter(s => s !== this.kingBallAttr);
                         this.effectiveWeights = {};
-                        for (let slot of this.effectiveSlots) {
-                            this.effectiveWeights[slot] = this.weights[slot];
-                        }
+                        for (let slot of this.effectiveSlots) this.effectiveWeights[slot] = this.weights[slot];
                         this.totalEffectiveWeight = Object.values(this.effectiveWeights).reduce((a, b) => a + b, 0);
                         this.effectiveK = 2;
                     }
 
                     this.prob1 = this.prob2 = this.prob3 = 0;
-                    if (this.isKingBall) {
-                        this.prob3 = 1;
-                    } else {
-                        this._calcCountProbs();
-                    }
+                    if (this.isKingBall) this.prob3 = 1;
+                    else this._calcCountProbs();
                     this.comboCache = {};
                 }
 
@@ -406,7 +401,6 @@
                     const key = combo.slice().sort().join(',');
                     if (!this.comboCache[k]) this.comboCache[k] = {};
                     if (this.comboCache[k][key] !== undefined) return this.comboCache[k][key];
-
                     let prob = 0;
                     const perms = permutations(combo);
                     for (let perm of perms) {
@@ -428,7 +422,6 @@
                     const cacheKey = 'eff_' + key;
                     if (!this.comboCache[this.effectiveK]) this.comboCache[this.effectiveK] = {};
                     if (this.comboCache[this.effectiveK][cacheKey] !== undefined) return this.comboCache[this.effectiveK][cacheKey];
-
                     let prob = 0;
                     const perms = permutations(combo);
                     for (let perm of perms) {
@@ -451,9 +444,7 @@
                         if (probK === 0) continue;
                         const combos = combinations(SLOTS, k);
                         let sum = 0;
-                        for (let combo of combos) {
-                            if (condition(combo)) sum += this.probabilityOfExactCombo(combo);
-                        }
+                        for (let combo of combos) if (condition(combo)) sum += this.probabilityOfExactCombo(combo);
                         total += probK * sum;
                     }
                     return total;
@@ -463,24 +454,16 @@
                     if (!this.isKingBall) return 0;
                     let sum = 0;
                     const combos = combinations(this.effectiveSlots, 2);
-                    for (let combo of combos) {
-                        if (condition(combo)) {
-                            sum += this.probabilityOfEffectiveCombo(combo);
-                        }
-                    }
+                    for (let combo of combos) if (condition(combo)) sum += this.probabilityOfEffectiveCombo(combo);
                     return sum;
                 }
 
                 getSingleAttrProbs() {
                     const result = {};
                     for (let slot of SLOTS) {
-                        if (this.isKingBall && slot === this.kingBallAttr) {
-                            result[slot] = 1.0;
-                        } else if (this.isKingBall) {
-                            result[slot] = this.getKingBallProbability(combo => combo.includes(slot));
-                        } else {
-                            result[slot] = this.getTotalProbability(combo => combo.includes(slot));
-                        }
+                        if (this.isKingBall && slot === this.kingBallAttr) result[slot] = 1.0;
+                        else if (this.isKingBall) result[slot] = this.getKingBallProbability(combo => combo.includes(slot));
+                        else result[slot] = this.getTotalProbability(combo => combo.includes(slot));
                     }
                     return result;
                 }
@@ -490,13 +473,32 @@
                     if (uniq.length === 0) return 0;
                     if (this.isKingBall) {
                         if (!uniq.includes(this.kingBallAttr)) return 0;
-                        const remainingTargets = uniq.filter(s => s !== this.kingBallAttr);
-                        if (remainingTargets.length > this.effectiveK) return 0;
-                        if (remainingTargets.length === 0) return 1;
-                        return this.getKingBallProbability(combo => remainingTargets.every(t => combo.includes(t)));
+                        const remaining = uniq.filter(s => s !== this.kingBallAttr);
+                        if (remaining.length > this.effectiveK) return 0;
+                        if (remaining.length === 0) return 1;
+                        return this.getKingBallProbability(combo => remaining.every(t => combo.includes(t)));
                     } else {
                         return this.getTotalProbability(combo => uniq.every(a => combo.includes(a)));
                     }
+                }
+
+                getKingBallRecommendation(targetAttrs) {
+                    if (!this.isKingBall) return "";
+                    const remaining = targetAttrs.filter(s => s !== this.kingBallAttr);
+                    if (remaining.length === 0) return "目标仅包含性格属性，国王球已保证。";
+                    if (remaining.length > 2) return "目标属性过多，无法全部继承。";
+                    const recParents = remaining.join('、');
+                    return `推荐使用父母本双方都只有【${recParents}】两条相同个体值的精灵，搭配国王球契约，可最大化完美继承概率。`;
+                }
+            }
+
+            function enforceMaxSelection(cb, groupName) {
+                const all = document.querySelectorAll(`input[name="${groupName}"]`);
+                if (Array.from(all).filter(c => c.checked).length > 3) {
+                    cb.checked = false;
+                    const label = cb.parentElement;
+                    label.classList.add('shake-error');
+                    setTimeout(() => label.classList.remove('shake-error'), 500);
                 }
             }
 
@@ -506,10 +508,11 @@
                 SLOTS.forEach(slot => {
                     const label = document.createElement('label');
                     const cb = document.createElement('input');
-                    cb.type = 'checkbox';
-                    cb.value = slot;
-                    cb.name = groupName;
-                    cb.addEventListener('change', updateBadges);
+                    cb.type = 'checkbox'; cb.value = slot; cb.name = groupName;
+                    cb.addEventListener('change', function() {
+                        enforceMaxSelection(cb, groupName);
+                        updateBadges();
+                    });
                     label.appendChild(cb);
                     label.appendChild(document.createTextNode(slot));
                     container.appendChild(label);
@@ -531,9 +534,7 @@
                 SLOTS.forEach(slot => {
                     const label = document.createElement('label');
                     const radio = document.createElement('input');
-                    radio.type = 'radio';
-                    radio.name = 'kingball';
-                    radio.value = slot;
+                    radio.type = 'radio'; radio.name = 'kingball'; radio.value = slot;
                     label.appendChild(radio);
                     label.appendChild(document.createTextNode(slot));
                     container.appendChild(label);
@@ -554,8 +555,23 @@
             function displayResults(calc) {
                 const area = document.getElementById('resultsArea');
                 area.classList.add('active');
-                let html = '';
+                const fatherVals = Array.from(calc.fatherSet);
+                const motherVals = Array.from(calc.motherSet);
+                const kingAttr = calc.kingBallAttr;
 
+                currentResultSnapshot = {
+                    father: fatherVals,
+                    mother: motherVals,
+                    kingBall: kingAttr,
+                    prob1: calc.prob1,
+                    prob2: calc.prob2,
+                    prob3: calc.prob3,
+                    singles: calc.getSingleAttrProbs(),
+                    target: null,
+                    targetProb: null
+                };
+
+                let html = '';
                 html += `<div class="scroll-card">
                     <h3>📜 遗传条数占卜</h3>
                     <div class="prob-row">
@@ -570,7 +586,10 @@
 
                 const singles = calc.getSingleAttrProbs();
                 html += `<div class="scroll-card">
-                    <h3>🔮 六维属性预言</h3>
+                    <h3>
+                        <img src="https://patchwiki.biligame.com/images/rocom/e/e4/15ca1cfmq9j16571121rp8b7xbirdzt.png" style="width:24px; height:24px; vertical-align:middle; margin-right:6px; filter:drop-shadow(0 0 6px #a855f7);" alt="占卜球">
+                        六维属性预言
+                    </h3>
                     <table class="attr-table">
                         <tr><th>属性</th><th>遗传概率</th></tr>`;
                 for (let s of SLOTS) {
@@ -580,22 +599,39 @@
 
                 html += `<div class="scroll-card">
                     <h3>
-                        <svg class="icon-medal" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="50" cy="50" r="45" fill="#ffd700" stroke="#cc9900" stroke-width="3"/>
-                            <circle cx="50" cy="50" r="38" fill="#ffe066" stroke="#e6b800" stroke-width="1.5"/>
-                            <polygon points="50,15 58,38 82,38 63,53 70,78 50,63 30,78 37,53 18,38 42,38" fill="#ffcc00" stroke="#cc9900" stroke-width="2"/>
-                            <circle cx="50" cy="45" r="12" fill="#ffffff" opacity="0.6"/>
-                            <text x="50" y="52" text-anchor="middle" font-size="14" font-weight="bold" fill="#cc8800">完美</text>
-                        </svg>
+                        <img src="https://patchwiki.biligame.com/images/rocom/9/95/ksozotzjdbpobfw37170k4fr513iufu.png" class="icon-medal" alt="完美奖牌">
                         完美继承概率计算
                     </h3>
                     <p class="tiny-note">选择你希望子代同时拥有的属性（最多3个）</p>
+                    <div style="margin-bottom:8px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+                        <button class="btn-small" id="presetParentsBtn">一键填入父母所拥有个体</button>
+                        <button class="btn-small" id="calcTargetBtn" style="padding:8px 20px; font-size:0.9rem;">开始计算</button>
+                    </div>
                     <div class="target-area">
                         <div class="gem-grid" id="targetGems"></div>
-                        <button class="btn-cast btn-secondary" id="calcTargetBtn">开始计算</button>
-                        <span class="target-result" id="targetResult"></span>
                     </div>
                     <p class="error-txt" id="targetError" style="display:none;"></p>
+                    <div id="targetResultWrapper" style="text-align:center; margin: 12px 0;">
+                        <span class="target-result" id="targetResult">—</span>
+                    </div>
+
+                    <div style="margin-top:15px;">
+                        <label style="font-weight:bold;">
+                            <img src="https://patchwiki.biligame.com/images/rocom/0/0d/gkijb43j6tp5kadtksuux84zwrrawua.png" style="width:24px; height:24px; vertical-align:middle; margin-right:6px; filter:drop-shadow(0 0 4px #ffcc00);" alt="神奇的蛋">
+                            孵化次数模拟：
+                        </label>
+                        <div class="simulator-area">
+                            <span>预计准备</span>
+                            <input type="number" id="eggCount" placeholder="数量" min="1" value="10">
+                            <span>个蛋，至少成功一次的概率：</span>
+                            <span id="simulatedProb" style="font-weight:bold; color:#2d5a0c; font-size:1.2rem;">—</span>
+                        </div>
+                    </div>
+                    <div id="recommendArea" style="margin-top:15px;"></div>
+                    <div class="compare-buttons">
+                        <button class="btn-small" id="saveToSlotA">📋 保存到方案一</button>
+                        <button class="btn-small" id="saveToSlotB">📋 保存到方案二</button>
+                    </div>
                 </div>`;
 
                 area.innerHTML = html;
@@ -604,35 +640,120 @@
                 SLOTS.forEach(slot => {
                     const label = document.createElement('label');
                     const cb = document.createElement('input');
-                    cb.type = 'checkbox';
-                    cb.value = slot;
-                    cb.name = 'target';
+                    cb.type = 'checkbox'; cb.value = slot; cb.name = 'target';
                     label.appendChild(cb);
                     label.appendChild(document.createTextNode(slot));
                     targetContainer.appendChild(label);
                 });
 
-                document.getElementById('calcTargetBtn').addEventListener('click', () => {
+                document.getElementById('presetParentsBtn').addEventListener('click', () => {
+                    const fatherSet = new Set(getChecked('father'));
+                    const motherSet = new Set(getChecked('mother'));
+                    const union = new Set([...fatherSet, ...motherSet]);
+                    document.querySelectorAll('input[name="target"]').forEach(cb => {
+                        cb.checked = union.has(cb.value);
+                    });
+                });
+
+                function updateSnapshotTarget() {
+                    if (currentResultSnapshot) {
+                        const selected = getChecked('target');
+                        if (selected.length > 0 && selected.length <= 3) {
+                            currentResultSnapshot.target = selected;
+                            currentResultSnapshot.targetProb = calc.getTargetProb(selected);
+                        }
+                    }
+                }
+
+                function computeAndSimulate() {
                     const selected = getChecked('target');
                     const errEl = document.getElementById('targetError');
                     const resEl = document.getElementById('targetResult');
-                    errEl.style.display = 'none';
-                    resEl.textContent = '';
-                    if (selected.length === 0) {
-                        errEl.textContent = '请至少选择一项属性！';
-                        errEl.style.display = 'inline-block';
-                        return;
-                    }
-                    if (selected.length > 3) {
-                        errEl.textContent = '最多只能选择3项属性！';
-                        errEl.style.display = 'inline-block';
-                        return;
-                    }
+                    const simEl = document.getElementById('simulatedProb');
+                    errEl.style.display = 'none'; resEl.textContent = '—'; simEl.textContent = '—';
+                    if (selected.length === 0) { errEl.textContent = '请至少选择一项属性！'; errEl.style.display = 'inline-block'; return; }
+                    if (selected.length > 3) { errEl.textContent = '最多只能选择3项属性！'; errEl.style.display = 'inline-block'; return; }
                     const prob = calc.getTargetProb(selected);
                     resEl.textContent = `${(prob*100).toFixed(2)}%`;
+                    const eggInput = document.getElementById('eggCount');
+                    const n = parseInt(eggInput.value) || 0;
+                    if (n > 0 && prob > 0) simEl.textContent = `${((1 - Math.pow(1 - prob, n))*100).toFixed(2)}%`;
+                    const recArea = document.getElementById('recommendArea');
+                    if (calc.isKingBall && selected.length > 0) {
+                        recArea.innerHTML = `<div class="recommend-box">💡 国王球最优配置建议：${calc.getKingBallRecommendation(selected)}</div>`;
+                    } else recArea.innerHTML = '';
+                    updateSnapshotTarget();
+                }
+
+                document.getElementById('calcTargetBtn').addEventListener('click', computeAndSimulate);
+                document.getElementById('eggCount').addEventListener('input', () => {
+                    if (document.getElementById('targetResult').textContent.includes('%')) computeAndSimulate();
+                });
+
+                document.getElementById('saveToSlotA').addEventListener('click', () => {
+                    if (!currentResultSnapshot) return;
+                    updateSnapshotTarget();
+                    compareSlots[0] = { ...currentResultSnapshot };
+                    renderComparePanel();
+                });
+                document.getElementById('saveToSlotB').addEventListener('click', () => {
+                    if (!currentResultSnapshot) return;
+                    updateSnapshotTarget();
+                    compareSlots[1] = { ...currentResultSnapshot };
+                    renderComparePanel();
                 });
 
                 area.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            function renderComparePanel() {
+                let existingPanel = document.querySelector('.compare-panel');
+                if (!existingPanel) {
+                    const area = document.getElementById('resultsArea');
+                    const panel = document.createElement('div');
+                    panel.className = 'compare-panel scroll-card';
+                    panel.id = 'comparePanel';
+                    area.appendChild(panel);
+                    existingPanel = panel;
+                }
+                if (!compareSlots[0] && !compareSlots[1]) {
+                    existingPanel.classList.remove('active');
+                    return;
+                }
+                existingPanel.classList.add('active');
+
+                let maxProb = -1;
+                let winners = [false, false];
+                const probA = compareSlots[0]?.targetProb ?? -1;
+                const probB = compareSlots[1]?.targetProb ?? -1;
+                if (probA > probB && probA >= 0) winners[0] = true;
+                if (probB > probA && probB >= 0) winners[1] = true;
+
+                let html = '<h3>⚖️ 孵蛋方案对比</h3>';
+                const slotNames = ['方案一', '方案二'];
+                const colors = ['#4a90d9', '#e05a4f'];
+                for (let i = 0; i < 2; i++) {
+                    const data = compareSlots[i];
+                    if (!data) continue;
+                    const winnerClass = winners[i] ? 'winner' : '';
+                    html += `<div class="compare-slot ${winnerClass}" style="border-color: ${winners[i] ? '#ffd700' : colors[i]};">
+                        ${winners[i] ? `<div class="winner-badge" title="概率更高">
+                            <img src="https://patchwiki.biligame.com/images/rocom/1/1c/mtb5tqy5cxqcyc2c63pu9rj3ho7w6d2.png" style="width:36px; height:36px;" alt="优胜印泥">
+                        </div>` : ''}
+                        <strong style="color:${colors[i]};">${slotNames[i]}</strong>
+                        <p>父本：${data.father.join('、') || '无'} | 母本：${data.mother.join('、') || '无'} | 国王球：${data.kingBall || '无'}</p>
+                        <p>遗传条数：1条 ${(data.prob1*100).toFixed(1)}% | 2条 ${(data.prob2*100).toFixed(1)}% | 3条 ${(data.prob3*100).toFixed(1)}%</p>
+                        <p>单属性概率：${SLOTS.map(s => `${s}:${(data.singles[s]*100).toFixed(1)}%`).join('，')}</p>
+                        ${data.target ? `<p>完美继承目标：${data.target.join('、')} 概率：<strong>${(data.targetProb*100).toFixed(2)}%</strong></p>` : '<p>尚未计算完美继承</p>'}
+                    </div>`;
+                }
+                html += '<button class="btn-small" id="clearCompareBtn">清除对比</button>';
+                existingPanel.innerHTML = html;
+                document.getElementById('clearCompareBtn').addEventListener('click', () => {
+                    compareSlots = [null, null];
+                    renderComparePanel();
+                });
+                existingPanel.scrollIntoView({ behavior: 'smooth' });
             }
 
             createGemGrid('fatherGems', 'father');
@@ -644,10 +765,6 @@
             document.getElementById('calculateBtn').addEventListener('click', () => {
                 const fatherVals = getChecked('father');
                 const motherVals = getChecked('mother');
-                if (fatherVals.length > 3 || motherVals.length > 3) {
-                    alert('父本或母本个体值不能超过3条！');
-                    return;
-                }
                 const useKing = document.getElementById('useKingBall').checked;
                 const kingAttr = useKing ? getSelectedKingBallAttr() : null;
                 const calc = new BreedCalculator(fatherVals, motherVals, kingAttr);
